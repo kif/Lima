@@ -169,10 +169,17 @@ POINTGREY_FULL_VERSION = $(shell cat camera/pointgrey/VERSION)
 INSTALL_POINTGREY_VDIR = $(INSTALL_POINTGREY_DIR)/v$(POINTGREY_FULL_VERSION)
 endif
 
+
 ifneq ($(COMPILE_IMXPAD), 0)
 INSTALL_IMXPAD_DIR = $(INSTALL_PLAT_DIR)/imXpad
 IMXPAD_FULL_VERSION = $(shell cat camera/imxpad/VERSION)
 INSTALL_IMXPAD_VDIR = $(INSTALL_IMXPAD_DIR)/v$(IMXPAD_FULL_VERSION)
+endif
+
+ifneq ($(COMPILE_TUTORIAL), 0)
+INSTALL_TUTORIAL_DIR = $(INSTALL_PLAT_DIR)/Tutorial
+TUTORIAL_FULL_VERSION = $(shell cat camera/tutorial/VERSION)
+INSTALL_TUTORIAL_VDIR = $(INSTALL_TUTORIAL_DIR)/v$(TUTORIAL_FULL_VERSION)
 endif
 
 ifneq ($(COMPILE_SPS_IMAGE),0)
@@ -429,6 +436,7 @@ ifneq ($(COMPILE_POINTGREY), 0)
 	cp camera/pointgrey/include/*.h $(INSTALL_INCLUDE_DIR)
 endif
 
+
 ifneq ($(COMPILE_IMXPAD), 0)
 	mkdir -p $(INSTALL_IMXPAD_VDIR)
 	cp camera/imxpad/python/__init__.py $(INSTALL_IMXPAD_DIR)
@@ -438,3 +446,15 @@ ifneq ($(COMPILE_IMXPAD), 0)
 	cp sip/imxpad/limaimxpad.so $(INSTALL_IMXPAD_VDIR)
 	cp camera/imxpad/include/*.h $(INSTALL_INCLUDE_DIR)
 endif
+
+ifneq ($(COMPILE_TUTORIAL), 0)
+	mkdir -p $(INSTALL_TUTORIAL_VDIR)
+	cp camera/tutorial/python/__init__.py $(INSTALL_TUTORIAL_DIR)
+	$(call install_core_dep,$(INSTALL_TUTORIAL_VDIR))
+	rm -rf $(INSTALL_LIB_DIR)/liblimatutorial.so*
+	cp -d build/liblimatutorial.so* $(INSTALL_LIB_DIR)
+	cp sip/tutorial/limatutorial.so $(INSTALL_TUTORIAL_VDIR)
+	cp camera/tutorial/include/*.h $(INSTALL_INCLUDE_DIR)
+endif
+
+

@@ -520,7 +520,28 @@ $(call lib-full,$(imxpad-name),$(imxpad-ver)): $(imxpad-objs)
 	$(call create-links,$(imxpad-name),$(imxpad-ver))
 
 build_targets	+= $(call lib-full,$(imxpad-name),$(imxpad-ver))
+endif
 
+############################
+# LIMA - TUTORIAL
+############################
+ifneq ($(COMPILE_TUTORIAL),0)
+
+TUTORIAL_LDFLAGS	:= $(LDFLAGS)
+TUTORIAL_LDLIBS	:= $(LDLIBS) -lv4l2
+
+tutorial-name	:= tutorial
+tutorial-objs	:= ../camera/tutorial/src/Tutorial.o
+tutorial-ver	:= ../camera/tutorial/VERSION
+tutorial-flags	:= $(TUTORIAL_LDFLAGS)
+tutorial-deps	:= $(TUTORIAL_LDLIBS)
+
+$(call lib-full,$(tutorial-name),$(tutorial-ver)): $(tutorial-objs)
+	$(call compile-lib,$(tutorial-name),$(tutorial-ver),\
+			   $(tutorial-flags),$(tutorial-deps),$@,$+)
+	$(call create-links,$(tutorial-name),$(tutorial-ver))
+
+build_targets	+= $(call lib-full,$(tutorial-name),$(tutorial-ver))
 endif
 
 src:		$(build_targets)

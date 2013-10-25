@@ -54,6 +54,7 @@ modules = [('core',		['common', 'hardware', 'control']),
            ('pointgrey',        [os.path.join('camera','pointgrey')]),
            ('imxpad',           [os.path.join('camera','imxpad')]),
            ('dexela',          [os.path.join('camera','dexela')]),
+           ('tutorial',         [os.path.join('camera','tutorial')]),
            ]
 
 espiaModules = ['espia', 'frelon', 'maxipix']

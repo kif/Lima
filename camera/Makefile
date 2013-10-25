@@ -148,4 +148,12 @@ ifneq ($(COMPILE_IMXPAD),0)
 sub-dirs += imxpad
 endif
 
+ifndef COMPILE_TUTORIAL
+COMPILE_TUTORIAL = 0
+endif
+
+ifneq ($(COMPILE_TUTORIAL),0)
+sub-dirs += tutorial
+endif
+
 include ../global.inc

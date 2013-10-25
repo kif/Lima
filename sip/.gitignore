@@ -27,6 +27,7 @@ marccd
 pilatus
 pointgrey
 dexela
+tutorial
 *.obj
 lima*.exp
 lima*.lib
